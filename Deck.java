@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Integer.parseInt;
+
 
 
 
@@ -58,54 +58,72 @@ public class Deck {
     }
 
     //Metodo para sacar tarjeta del principio de la baraja y eliminarla del deck
-    public void getHead() {
-        if(barajaRandom.size()>0){
-            System.out.println(barajaRandom.get(0));
-            barajaRandom.remove(0);
-            System.out.println("Quedan: " + barajaRandom.size() + " cartas");
+    public void getHead() throws Exception{
+        try {
+            if (barajaRandom.size() > 0) {
+                System.out.println(barajaRandom.get(0));
+                barajaRandom.remove(0);
+                if(barajaRandom.size() <= 0) throw new Exception();
+                System.out.println("Quedan: " + barajaRandom.size() + " cartas");
+            } else {
+                System.out.println(baraja.get(0));
+                baraja.remove(0);
+                if(baraja.size() <=0) throw new Exception();
+                System.out.println("Quedan: " + baraja.size() + " cartas");
+            }
         }
-        else{
-            System.out.println(baraja.get(0));
-            baraja.remove(0);
-            System.out.println("Quedan: " + baraja.size() + " cartas");
+        catch (Exception e){
+            System.out.println("Se han agotado las cartas");
+            System.exit(1);
         }
     }
 
     //Metdo para sacar una tarjeta al azar y eliminarla del deck
-    public void getPick() {
-        if(barajaRandom.size()>0){
-            int aleatorio2 = randomNumbers.nextInt(0, barajaRandom.size());
-            System.out.println(barajaRandom.get(aleatorio2));
-            barajaRandom.remove(aleatorio2);
-            System.out.println("Quedan: " + barajaRandom.size() + " cartas");
-        }
-        else{
-            int aleatorio2 = randomNumbers.nextInt(0, baraja.size());
-            System.out.println(baraja.get(aleatorio2));
-            baraja.remove(aleatorio2);
-            System.out.println("Quedan: " + baraja.size() + " cartas");
+    public void getPick() throws Exception{
+        try {
+            if (barajaRandom.size() > 0) {
+                int aleatorio2 = randomNumbers.nextInt(0, barajaRandom.size());
+                System.out.println(barajaRandom.get(aleatorio2));
+                barajaRandom.remove(aleatorio2);
+                if(barajaRandom.size() <= 0) throw new Exception();
+                System.out.println("Quedan: " + barajaRandom.size() + " cartas");
+            } else {
+                int aleatorio2 = randomNumbers.nextInt(0, baraja.size());
+                System.out.println(baraja.get(aleatorio2));
+                baraja.remove(aleatorio2);
+                if(baraja.size() <=0) throw new Exception();
+                System.out.println("Quedan: " + baraja.size() + " cartas");
+            }
+        } catch (Exception e){
+            System.out.println("Se han agotado las cartas");
+            System.exit(1);
         }
     }
 
     //Metodo para sacar 5 cartas del deck
-    public void getHand() {
-        if(barajaRandom.size()>0){
-            int index = 0;
-            for (int i = 0; i < 5; i++) {
-                System.out.println(barajaRandom.get(index));
-                barajaRandom.remove(index);
+    public void getHand() throws Exception {
+        try {
+            if (barajaRandom.size() > 0) {
+                int index = 0;
+                for (int i = 0; i < 5; i++) {
+                    System.out.println(barajaRandom.get(index));
+                    barajaRandom.remove(index);
+                }
+                if(barajaRandom.size() <= 0) throw new Exception();
+                System.out.println("Quedan: " + barajaRandom.size() + " cartas");
+            } else {
+                int index = 0;
+                for (int i = 0; i < 5; i++) {
+                    System.out.println(baraja.get(index));
+                    baraja.remove(index);
+                }
+                if(baraja.size() <=0) throw new Exception();
+                System.out.println("Quedan: " + baraja.size() + " cartas");
             }
-            System.out.println("Quedan: " + barajaRandom.size() + " cartas");
+        } catch (Exception e){
+            System.out.println("Se han agotado las cartas");
+            System.exit(1);
         }
-        else{
-            int index = 0;
-            for (int i = 0; i < 5; i++) {
-                System.out.println(baraja.get(index));
-                baraja.remove(index);
-            }
-            System.out.println("Quedan: " + baraja.size() + " cartas");
-        }
-
     }
 
 }
